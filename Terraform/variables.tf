@@ -1,5 +1,5 @@
 variable "project" {
-  default = "plenary-magpie-277617"
+  default = "inbound-planet-291519"
 }
 
 variable "region" {
@@ -10,19 +10,23 @@ variable "zone"  {
   default = "us-central1-c"
 }
 
-variable "kube.nodecount" {
+variable "kube-nodecount" {
 	default = "3"
 }
 
-variable "kube.clustername" {
+variable "kube-clustername" {
 	default = "test-cluster"
 }
 
-variable "kube.poolname" {
+variable "kube-poolname" {
 	default = "main-pool"
 }
 
 ## Are the nodes pre-emptible? (90% savings, lasts up to 24hours)
-variable "kube.preemptible" {
+variable "kube-preemptible" {
 	default = "true"
+}
+
+variable bucket_name {
+	default = "tf-state-bucket-devenv"
 }

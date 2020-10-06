@@ -1,20 +1,38 @@
 import sys
 import re
 import os
+import subprocess
 
 
-paths = {'google-key-path':"/mnt/c/Users/James/Web Project/Terraform/google-key.json", 'terra-path':"/mnt/c/Users/James/Web Project/Terraform/"}
+##Needed paths
+paths = {
+        'terra-path':"Terraform/"
+        }
+        
+build_args = {
+              'terraform':"terraform apply"
+             }
+destroy_args = {
+              'terraform':"terraform destroy"
+             }
+                          
 
+##Build the enviroment
 def build():
-    print("Exporting google application credentials")
-    os.system('export GOOGLE_APPLICATION_CREDENTIALS={{paths["google-key-path"}}')
-    print("key exported")
-    os.system('cd' paths["terra-path"])
-    #os.system("terraform apply")
-    
+    for key,value in build_args.items():
+        if key == "terraform":
+            subprocess.call(value, shell=True, cwd=paths["terra-path"])
+        else:
+            continue
 
 def destroy():
-    print("destroy")
+    for key,value in destroy_args.items():
+        if key == "terraform":
+            subprocess.call(value, shell=True, cwd=paths["terra-path"])
+        else:
+            continue
+
+
 
 
 
@@ -27,14 +45,14 @@ def help():
            Help - Displays the help information
          """)
 
-           
-###User Input Loop
+
+###User Input
 if len(sys.argv) == 1:
    help()
 elif sys.argv[1] == "build":
     build()
 elif sys.argv[1] == "destroy":
-    print("destroy")
+    destroy()
 else:
     help()
 
