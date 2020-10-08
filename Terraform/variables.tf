@@ -30,3 +30,13 @@ variable "kube-preemptible" {
 variable bucket_name {
 	default = "tf-state-bucket-devenv"
 }
+
+variable namespaces {
+	 description = "KubeNamespaces"
+	 type        = list(string)
+     default     = ["neo", "trinity", "morpheus"]
+}
+
+variable nginxport{
+	default = "80"
+}

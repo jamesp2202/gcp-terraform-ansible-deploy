@@ -3,21 +3,20 @@ import re
 import os
 import subprocess
 
-
-##Needed paths
+##Needed paths- Not done Ansible yet.
 paths = {
-        'terra-path':"Terraform/"
+        'terra-path':"Terraform/", 'ansible-path':"Ansible/"
         }
-        
+##Build commands, in order of execute
 build_args = {
               'terraform':"terraform apply"
              }
+##Destroy commands, in order of execute
 destroy_args = {
               'terraform':"terraform destroy"
              }
-                          
-
-##Build the enviroment
+                    
+##Build the enviroment - done like this as going to be using terraform/ansible together eventually.
 def build():
     for key,value in build_args.items():
         if key == "terraform":
@@ -32,10 +31,6 @@ def destroy():
         else:
             continue
 
-
-
-
-
 def help():
     print("""
            ###########Help###########
@@ -44,8 +39,7 @@ def help():
            destroy - destroys the development enviroment
            Help - Displays the help information
          """)
-
-
+         
 ###User Input
 if len(sys.argv) == 1:
    help()
