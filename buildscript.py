@@ -2,28 +2,28 @@ import sys
 import re
 import os
 import subprocess
-
-##Needed paths- Not done Ansible yet.
-paths = {'terra-path':"Terraform/"}
-commands ={'build': ["terraform apply"], 'destroy': ["terraform destroy"]}
-## Main Build/Destroy
-def mainFunc(command):
-        for v in commands[command]:
-            subprocess.call(v, shell=True, cwd=paths["terra-path"])
-###Help Function
-def help():
-        print("""
+helpstr = """
            ###########Help###########
            Please select from one of the below
            build - builds the development enviroment
            destroy - destroys the development enviroment
-           Help - Displays the help information
-         """)
-###User Input
-if len(sys.argv) == 1 or  sys.argv[1] == "help":
-   help()
-else:
-    mainFunc(sys.argv[1])
+           help - Displays the help information
+         """
+paths = {'terra-path':"Terraform/"}
+commands ={'build': ["terraform apply"], 'destroy': ["terraform destroy"]}
+
+def mainFunc(command):
+        if command == "help":
+            print(helpstr)
+        else:
+            for v in commands[command]:
+                subprocess.call(v, shell=True, cwd=paths["terra-path"])
+       
+if __name__ == "__main__":
+    if sys.argv[1] in commands:
+        mainFunc(sys.argv[1])
+    else:
+        mainFunc("help")
 
 
 
