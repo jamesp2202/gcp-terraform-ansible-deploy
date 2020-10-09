@@ -120,6 +120,7 @@ resource "kubernetes_deployment" "example-app" {
 
 
 resource "kubernetes_service" "example-app" {
+  depends_on = [google_container_node_pool.primary_preemptible_nodes]
   metadata {
     name = "terraform-example"
   }
